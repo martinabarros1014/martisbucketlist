@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Marti's Summer Bucket List" />
+  <meta property="og:description" content="Marti's Summer Bucket List" />
+  <title>Marti's Summer Bucket List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2b241d;
+      --pink: #ff2e88;
+      --pink-soft: #ff6fb0;
+      --pink-deep: #d91469;
+      --title-pink: #ff85b3;
+      --title-gold: #ffd447;
+      --sky: #8ecae6;
+      --sky-deep: #3a9ad9;
+      --sky-bg: #d9ecff;
+      --orange: #ff6b1a;
+      --orange-bg: #fff0e0;
+      --green: #18b858;
+      --green-bg: #e3fce9;
+      --sun: #ffbe2e;
+      --lime: #d8f89a;
+      --spotify-dark: #191414;
+      --spotify-green: #1db954;
+      --shadow: 0 8px 22px rgba(43, 36, 29, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--ink);
+      background-color: #e8dcc8;
+      background-image: url("elementos/papel.jpg");
+      background-repeat: repeat;
+      background-size: 380px auto;
+      overflow-x: hidden;
+      padding-bottom: 90px;
+    }
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 16px 40px;
+      position: relative;
+    }
+
+    /* Barra superior */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 10;
+    }
+    .user-pill {
+      background: rgba(255, 253, 248, 0.96);
+      border: 2px solid var(--pink);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      color: var(--pink-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .admin-btn {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 15px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .admin-btn.active { background: var(--pink); }
+
+    /* Escenario superior con marcos izquierdo/derecho y título en el medio */
+    .collage-stage {
+      display: grid;
+      grid-template-columns: minmax(110px, 190px) minmax(0, 1fr) minmax(110px, 190px);
+      align-items: start;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .side-frame {
+      width: 100%;
+      pointer-events: none;
+      user-select: none;
+    }
+    .side-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.14));
+    }
+    .center-stage {
+      min-width: 0;
+    }
+
+    /* Título de la foto en el medio de ambos marcos */
+    .photo-title-banner {
+      text-align: center;
+      margin: 4px auto 14px;
+      padding: 4px 8px;
+    }
+    .photo-title-line1 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.1rem, 5.2vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0;
+      text-shadow: 2px 3px 0 rgba(43, 36, 29, 0.12);
+    }
+    .photo-title-martis {
+      color: var(--title-pink);
+    }
+    .photo-title-summer {
+      color: var(--title-gold);
+    }
+    .photo-title-line2 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--title-gold);
+      margin: 2px 0 0;
+      text-shadow: 2px 3px 0 rgba(43, 36, 29, 0.12);
+    }
+
+    /* Franja celeste de selección */
+    .select-bar-wrap {
+      text-align: center;
+      margin: 8px 0 18px;
+    }
+    .sky-banner-btn {
+      background: var(--sky);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 11px 24px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(58, 154, 217, 0.35);
+      transition: transform 0.18s ease, background 0.2s ease;
+    }
+    .sky-banner-btn:hover {
+      transform: translateY(-2px);
+      background: var(--sky-deep);
+    }
+    .sky-banner-btn.active {
+      background: var(--pink);
+      box-shadow: 0 6px 16px rgba(255, 46, 136, 0.35);
+    }
+
+    /* Lista checklist en 2 columnas dentro del centro */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 22px;
+      align-items: start;
+      min-height: 48px;
+    }
+    .empty-list-note {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 18px 12px;
+      border: 2px dashed rgba(255, 111, 176, 0.55);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.35);
+      font-size: 0.92rem;
+      color: #6b5e51;
+      font-weight: 600;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 9px 11px;
+      border-radius: 16px;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .check-item.selectable {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.48);
+    }
+    .check-item.selectable:hover {
+      background: rgba(255, 255, 255, 0.82);
+    }
+    .check-item.highlighted {
+      background: var(--lime);
+      box-shadow: 0 6px 16px rgba(154, 196, 62, 0.28);
+    }
+    .check-item.no-signup-item {
+      border-left: 4px solid var(--orange);
+    }
+    .pink-box {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border: 3px solid var(--pink-soft);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .check-item.highlighted .pink-box {
+      border-color: var(--pink);
+      background: #fff0f7;
+    }
+    .check-mark {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.65rem;
+      color: var(--ink);
+      line-height: 1;
+      transform: translate(2px, -3px);
+    }
+    .check-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .check-title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+    .check-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .check-item.done .check-name {
+      text-decoration: line-through;
+      text-decoration-thickness: 2.5px;
+      opacity: 0.72;
+    }
+    .check-people {
+      font-size: 0.84rem;
+      color: #6b5e51;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+    .badge-nosignup {
+      background: var(--orange-bg);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .mini-icon-btn {
+      border: none;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .mini-icon-btn:hover {
+      background: #fff;
+      transform: scale(1.06);
+    }
+    .reload-v2-btn {
+      background: var(--sun);
+      color: var(--ink);
+    }
+
+    /* Proponer actividad + Actividades a las que estás anotado */
+    .propose-bar {
+      display: flex;
+      gap: 8px;
+      max-width: 520px;
+      margin: 18px auto 14px;
+      flex-wrap: wrap;
+    }
+    input[type="text"], input[type="password"], input[type="date"], input[type="number"], textarea, select {
+      width: 100%;
+      padding: 10px 13px;
+      border: 2px solid #dfd1b8;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: rgba(255, 253, 248, 0.98);
+      color: var(--ink);
+    }
+    .propose-bar input {
+      flex: 1;
+      min-width: 190px;
+    }
+
+    .joined-summary-box {
+      margin-top: 14px;
+      background: rgba(255, 253, 248, 0.92);
+      border: 2.5px dashed var(--green);
+      border-radius: 18px;
+      padding: 13px 16px;
+    }
+    .joined-summary-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      color: #0e8a40;
+      margin: 0 0 8px;
+    }
+    .joined-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .joined-pill {
+      background: var(--green-bg);
+      border: 1.5px solid var(--green);
+      color: #0b6e33;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .content-column {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Reloj rosado grande e imponente */
+    .clock-section {
+      background: rgba(255, 244, 249, 0.95);
+      border: 3px solid var(--pink);
+      border-radius: 26px;
+      padding: 22px 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(210px, 0.85fr) 1.35fr;
+      align-items: center;
+      gap: 18px;
+    }
+    .clock-left { text-align: left; }
+    .clock-big-title {
+      font-family: 'Permanent Marker', cursive;
+      color: var(--pink);
+      line-height: 0.94;
+      margin: 0;
+    }
+    .clock-big-title .line-top {
+      display: block;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+    }
+    .clock-big-title .line-bottom {
+      display: block;
+      font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+      color: var(--pink-deep);
+    }
+    .clock-sub {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      color: var(--pink-deep);
+      margin-top: 8px;
+    }
+    .clock-right {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .clock-box {
+      background: #fff;
+      border: 2.5px solid var(--pink-soft);
+      border-radius: 18px;
+      padding: 12px 6px;
+      text-align: center;
+      min-width: 0;
+    }
+    .clock-num {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: var(--pink);
+      line-height: 1.05;
+    }
+    .clock-unit {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Memories estilo galería celeste con huecos listos y overlay al pasar el cursor */
+    .memories-zone {
+      background: var(--sky-bg);
+      border-radius: 26px;
+      padding: 24px 20px;
+      margin: 28px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #7ec4ff;
+    }
+    .memories-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .memories-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      color: var(--orange);
+      text-shadow: 2px 2px 0 #fff;
+      margin: 0;
+    }
+    .memories-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 230px;
+      gap: 16px;
+    }
+    .mem-slot-empty {
+      border-radius: 20px;
+      border: 2.5px dashed rgba(58, 154, 217, 0.55);
+      background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      text-align: center;
+      color: #4a779e;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .mem-slot-empty:hover {
+      background: rgba(255, 255, 255, 0.65);
+      transform: translateY(-2px);
+    }
+    .mem-slot-empty:nth-child(2),
+    .mem-slot-empty:nth-child(4) {
+      grid-column: span 2;
+    }
+    .mem-tile {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #cde4fc;
+      box-shadow: 0 6px 16px rgba(34, 72, 112, 0.14);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+    }
+    .mem-tile:nth-child(2),
+    .mem-tile:nth-child(4) {
+      grid-column: span 2;
+    }
+    .mem-tile:hover {
+      transform: translateY(-4px) rotate(-0.6deg) scale(1.015);
+      box-shadow: 0 14px 26px rgba(34, 72, 112, 0.24);
+      z-index: 2;
+    }
+    .mem-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .mem-tile:hover img { transform: scale(1.05); }
+    .mem-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 34px 16px 14px;
+      background: linear-gradient(to top, rgba(20, 24, 30, 0.84), rgba(20, 24, 30, 0));
+      color: #fff;
+      opacity: 0.92;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .mem-tile:hover .mem-overlay {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .mem-caption {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 3px;
+    }
+    .mem-meta {
+      font-size: 0.8rem;
+      color: #ffd166;
+      font-weight: 700;
+    }
+
+    /* Calendario con colores brillantes */
+    .calendar-zone {
+      margin: 28px 0;
+      background: var(--orange-bg);
+      border: 3px solid var(--orange);
+      border-radius: 26px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow);
+    }
+    .calendar-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(1.6rem, 3.8vw, 2.2rem);
+      color: var(--orange);
+      text-shadow: 2px 2px 0 #fff;
+      margin: 0 0 14px;
+      text-align: center;
+    }
+    .cal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .cal-month-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .cal-dow {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 8px;
+      padding: 5px 0;
+    }
+    .cal-day {
+      background: #fff;
+      border: 2px solid #ffd0a6;
+      border-radius: 12px;
+      min-height: 62px;
+      padding: 5px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.15s ease;
+    }
+    .cal-day:hover { transform: scale(1.02); }
+    .cal-day.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    .cal-day.has-plan {
+      border-color: var(--green);
+      background: var(--green-bg);
+    }
+    .cal-tag {
+      display: block;
+      margin-top: 4px;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.7rem;
+      border-radius: 6px;
+      padding: 2px 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cal-detail {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 2px solid #ffc694;
+      font-size: 0.92rem;
+    }
+
+    /* Playlist con verde brillante */
+    .playlist-zone {
+      margin: 28px 0;
+      background: var(--green-bg);
+      border: 3px solid var(--green);
+      border-radius: 26px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow);
+    }
+    .playlist-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(1.6rem, 3.8vw, 2.2rem);
+      color: var(--green);
+      text-shadow: 2px 2px 0 #fff;
+      margin: 0 0 14px;
+      text-align: center;
+    }
+
+    /* Embed de actividad estilo Spotify (sin info extra) */
+    .spotify-act-embed {
+      background: var(--spotify-dark);
+      color: #fff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 12px 0 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1.5px solid #2e2929;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+    }
+    .spotify-act-site {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--spotify-green);
+      margin-bottom: 3px;
+    }
+    .spotify-act-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .spotify-join-btn {
+      background: var(--spotify-green);
+      color: #0b1910;
+      border: none;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .spotify-join-btn:hover {
+      transform: scale(1.04);
+      filter: brightness(1.06);
+    }
+
+    /* Embed de toda la página web al final estilo Spotify (solo el título como botón, sin "Unirte") */
+    .site-embed-footer {
+      margin: 28px auto 10px;
+      display: flex;
+      justify-content: center;
+    }
+    .spotify-site-embed-btn {
+      background: var(--spotify-dark);
+      color: #fff;
+      border: 2px solid var(--spotify-green);
+      border-radius: 16px;
+      padding: 14px 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .spotify-site-embed-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(29, 185, 84, 0.28);
+    }
+    .spotify-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--spotify-green);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Botones generales */
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 9px 14px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-pink { background: var(--pink); color: #fff; }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-sun { background: var(--sun); color: var(--ink); }
+    .btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid #dfd1b8; }
+    .btn-sm { padding: 6px 10px; font-size: 0.82rem; border-radius: 10px; }
+
+    /* Admin panel */
+    .admin-panel {
+      display: none;
+      background: #2b241d;
+      color: #fff;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .admin-panel.open { display: block; }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .admin-box {
+      background: rgba(255,255,255,0.08);
+      padding: 12px;
+      border-radius: 14px;
+    }
+    .preset-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    /* Modales */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 22, 18, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #fffdf9;
+      border: 3px solid var(--pink);
+      border-radius: 22px;
+      max-width: 440px;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.28);
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: #f2e8dc;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .preview-thumb {
+      width: 100%;
+      max-height: 190px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 8px 0;
+      display: none;
+      border: 2px solid var(--sky);
+    }
+
+    @media (max-width: 820px) {
+      .collage-stage {
+        grid-template-columns: 72px minmax(0, 1fr) 72px;
+        gap: 6px;
+      }
+      .checklist-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .clock-section {
+        grid-template-columns: 1fr;
+      }
+      .memories-masonry {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+      }
+      .mem-tile:nth-child(2),
+      .mem-tile:nth-child(4),
+      .mem-slot-empty:nth-child(2),
+      .mem-slot-empty:nth-child(4) {
+        grid-column: span 1;
+      }
+    }
+    @media (max-width: 520px) {
+      .collage-stage {
+        grid-template-columns: 1fr;
+      }
+      .side-frame {
+        display: none;
+      }
+      .clock-section {
+        padding: 16px 12px;
+        gap: 12px;
+      }
+      .clock-right {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .clock-box {
+        padding: 8px 3px;
+        border-radius: 12px;
+      }
+      .clock-num {
+        font-size: 1.35rem;
+      }
+      .clock-unit {
+        font-size: 0.62rem;
+        letter-spacing: -0.2px;
+      }
+      .cal-day {
+        min-height: 50px;
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <!-- Barra superior -->
+  <div class="topbar">
+    <button id="userPill" class="user-pill" onclick="openNameModal()">
+      <span>👤</span>
+      <span id="currentUserLabel">Hola! Poné tu nombre</span>
+    </button>
+    <button id="adminBtn" class="admin-btn" onclick="openAdminModal()">🔒 Admin</button>
+  </div>
+
+  <!-- Panel Admin -->
+  <div id="adminPanel" class="admin-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0; font-family:'Fredoka',sans-serif; color:#ff8ec0;">🛠️ Modo Admin</h3>
+      <button class="btn btn-sm btn-ghost" onclick="logoutAdmin()">Cerrar Admin</button>
+    </div>
+    <div class="admin-grid">
+      <div class="admin-box">
+        <strong>+ Nueva actividad</strong>
+        <input type="text" id="admActName" placeholder="Nombre de la actividad" style="margin:8px 0 6px;">
+        <input type="text" id="admActInfo" placeholder="Breve descripción / info" style="margin-bottom:6px;">
+        <label style="display:flex; align-items:center; gap:6px; font-size:0.84rem; margin-bottom:8px; cursor:pointer;">
+          <input type="checkbox" id="admActNoSignup" style="width:auto;">
+          <span>Sin anotarse (solo contador de cuántos van)</span>
+        </label>
+        <button class="btn btn-pink btn-sm" style="width:100%;" onclick="adminCreateActivity()">Agregar a la lista</button>
+        <div class="preset-row">
+          <button class="btn btn-sun btn-sm" onclick="addSpecialPreset('+50 amigos')">+ +50 amigos</button>
+          <button class="btn btn-sun btn-sm" onclick="addSpecialPreset('+50 juntadas')">+ +50 juntadas</button>
+          <button class="btn btn-sun btn-sm" onclick="addSpecialPreset('100 rechazos')">+ 100 rechazos</button>
+        </div>
+      </div>
+
+      <div class="admin-box">
+        <strong>🔢 Ajustar contador y modo</strong>
+        <select id="admManageActivity" onchange="syncManageActivityFields()" style="margin:8px 0 6px;"></select>
+        <input type="number" id="admManualCount" min="0" placeholder="Cantidad / contador" style="margin-bottom:6px;">
+        <label style="display:flex; align-items:center; gap:6px; font-size:0.84rem; margin-bottom:8px; cursor:pointer;">
+          <input type="checkbox" id="admEditNoSignup" style="width:auto;">
+          <span>Marcar como sin anotarse</span>
+        </label>
+        <button class="btn btn-orange btn-sm" style="width:100%;" onclick="adminSaveActivitySettings()">Guardar contador / modo</button>
+      </div>
+
+      <div class="admin-box">
+        <strong>📅 Agendar actividad en calendario</strong>
+        <select id="admLinkActivity" style="margin:8px 0 6px;"></select>
+        <input type="date" id="admLinkDate" style="margin-bottom:8px;">
+        <button class="btn btn-green btn-sm" style="width:100%;" onclick="adminScheduleActivity()">Agendar fecha</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escenario dividido en 3: marcoizquierdo.png | título de la foto + lista en el medio | marcoderecho.png -->
+  <div class="collage-stage">
+    <aside class="side-frame" aria-hidden="true">
+      <img src="elementos/marcoizquierdo.png" alt="">
+    </aside>
+
+    <main class="center-stage">
+      <header class="photo-title-banner">
+        <h1 class="photo-title-line1">
+          <span class="photo-title-martis">MARTI'S</span>
+          <span class="photo-title-summer">SUMMER</span>
+        </h1>
+        <div class="photo-title-line2">BUCKET LIST</div>
+      </header>
+
+      <!-- Franja celeste debajo del título -->
+      <div class="select-bar-wrap">
+        <button id="toggleSelectBtn" class="sky-banner-btn" onclick="toggleSelectionMode()">
+          SELECCIONA ACTIVIDADES PARA ANOTARTE
+        </button>
+        <div id="selectionHint" style="display:none; margin-top:8px; font-weight:700; color:var(--pink-deep);">
+          Tocá las actividades que quieras para sumarte o bajarte 👇
+        </div>
+        <div id="confirmSelectionBar" style="display:none; margin-top:10px; gap:8px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn btn-pink" onclick="confirmSelectedActivities()">✅ Guardar mi selección</button>
+          <button class="btn btn-ghost" onclick="cancelSelectionMode()">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Lista de actividades en 2 columnas entre ambos marcos -->
+      <section id="zoneActivities">
+        <div id="activitiesGrid" class="checklist-grid"></div>
+
+        <div class="propose-bar">
+          <input type="text" id="proposeInput" placeholder="Proponer una actividad nueva...">
+          <button class="btn btn-orange" onclick="proposeActivity()">+ Proponer</button>
+        </div>
+
+        <!-- Debajo de la lista: Actividades a las que estás anotado -->
+        <div class="joined-summary-box">
+          <h3 class="joined-summary-title">📌 Actividades a las que estás anotado</h3>
+          <div id="myJoinedList" class="joined-tags"></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="side-frame" aria-hidden="true">
+      <img src="elementos/marcoderecho.png" alt="">
+    </aside>
+  </div>
+
+  <div class="content-column">
+    <!-- Reloj rosado grande: VERANO / RESTANTE -->
+    <section class="clock-section" aria-label="Verano restante">
+      <div class="clock-left">
+        <h2 class="clock-big-title">
+          <span class="line-top">VERANO</span>
+          <span class="line-bottom">RESTANTE</span>
+        </h2>
+        <div id="clockSubText" class="clock-sub">Temporada desde el 28 de noviembre</div>
+      </div>
+      <div class="clock-right">
+        <div class="clock-box">
+          <div id="cDays" class="clock-num">00</div>
+          <div class="clock-unit">días</div>
+        </div>
+        <div class="clock-box">
+          <div id="cHours" class="clock-num">00</div>
+          <div class="clock-unit">horas</div>
+        </div>
+        <div class="clock-box">
+          <div id="cMins" class="clock-num">00</div>
+          <div class="clock-unit">minutos</div>
+        </div>
+        <div class="clock-box">
+          <div id="cSecs" class="clock-num">00</div>
+          <div class="clock-unit">segundos</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memories debajo de actividades -->
+    <section class="memories-zone" id="zoneMemories">
+      <div class="memories-header">
+        <h2 class="memories-title">MEMORIES</h2>
+        <button class="btn btn-orange" onclick="openMemoryModal()">📸 Subir foto</button>
+      </div>
+      <div id="memoriesGrid" class="memories-masonry"></div>
+    </section>
+
+    <!-- Calendario con colores brillantes -->
+    <section class="calendar-zone" id="zoneCalendar">
+      <h2 class="calendar-title">CALENDARIO</h2>
+      <div class="cal-top">
+        <button class="btn btn-orange btn-sm" onclick="moveMonth(-1)">◀ Mes anterior</button>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <select id="monthPicker" onchange="pickMonth(this.value)" style="width:auto; padding:6px 10px;"></select>
+          <span id="calYearLabel" class="cal-month-label"></span>
+        </div>
+        <button class="btn btn-orange btn-sm" onclick="moveMonth(1)">Mes siguiente ▶</button>
+      </div>
+      <div id="calGrid" class="cal-grid"></div>
+      <div id="calDetail" class="cal-detail">Tocá un día del calendario para ver qué actividades hay agendadas.</div>
+    </section>
+
+    <!-- Playlist con verde brillante -->
+    <section class="playlist-zone" id="zonePlaylist">
+      <h2 class="playlist-title">PLAYLIST DEL VERANO</h2>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5oOHFNcPYV2l8f8SQRqXwF?utm_source=generator&si=70b1f8a0ddb04dcd" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </section>
+
+    <!-- Embed de toda la página web al final (solo el nombre como botón, sin "Unirte") -->
+    <footer class="site-embed-footer">
+      <button type="button" class="spotify-site-embed-btn" onclick="shareSiteEmbed()">
+        <span class="spotify-dot"></span>
+        <span id="siteEmbedLabel">Marti's Summer Bucket List</span>
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- Modal Inicial / Cambio de Nombre -->
+<div id="nameModal" class="modal-backdrop">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('nameModal')">✕</button>
+    <h3 style="margin-top:0; font-family:'Fredoka',sans-serif; color:var(--pink-deep);">¿Cuál es tu nombre?</h3>
+    <p style="font-size:0.92rem;">Así sabemos quién sos cuando te anotás en las actividades.</p>
+    <input type="text" id="nameInput" placeholder="Escribí tu nombre..." style="margin-bottom:12px;">
+    <button class="btn btn-pink" style="width:100%;" onclick="saveUserName()">Guardar nombre</button>
+  </div>
+</div>
+
+<!-- Modal Clave Admin -->
+<div id="adminPassModal" class="modal-backdrop">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('adminPassModal')">✕</button>
+    <h3 style="margin-top:0; font-family:'Fredoka',sans-serif; color:var(--pink-deep);">Acceso Admin</h3>
+    <p style="font-size:0.9rem;">Ingresá la contraseña para administrar actividades y fechas.</p>
+    <input type="password" id="adminPassInput" placeholder="Contraseña..." style="margin-bottom:12px;">
+    <button class="btn btn-pink" style="width:100%;" onclick="verifyAdminPass()">Entrar</button>
+  </div>
+</div>
+
+<!-- Mini pantallita con información de la actividad + embed de actividad estilo Spotify -->
+<div id="infoModal" class="modal-backdrop">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('infoModal')">✕</button>
+    <h3 id="infoTitle" style="margin-top:0; font-family:'Caveat',cursive; font-size:2rem; color:var(--pink-deep);"></h3>
+    <p id="infoDesc" style="font-size:0.95rem; line-height:1.45;"></p>
+    <p id="infoPeople" style="font-size:0.88rem; color:#5e5246; font-weight:600;"></p>
+    <p id="infoCalDates" style="font-size:0.85rem; color:var(--green); font-weight:700;"></p>
+
+    <div class="spotify-act-embed">
+      <div>
+        <div class="spotify-act-site">Marti's Summer Bucket List</div>
+        <div id="embedActTitle" class="spotify-act-name"></div>
+      </div>
+      <button type="button" id="embedJoinBtn" class="spotify-join-btn" onclick="joinFromActivityEmbed()">Unirte</button>
+    </div>
+
+    <div style="display:flex; gap:8px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="copyCurrentActivityLink()">🔗 Copiar link</button>
+      <button type="button" class="btn btn-pink btn-sm" onclick="closeModal('infoModal')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Subir Foto a Memories -->
+<div id="memoryModal" class="modal-backdrop">
+  <div class="modal-card" style="border-color: var(--orange);">
+    <button class="modal-close" onclick="closeModal('memoryModal')">✕</button>
+    <h3 style="margin-top:0; font-family:'Fredoka',sans-serif; color:var(--orange);">📸 Subir recuerdo</h3>
+    <label style="font-size:0.85rem; font-weight:700;">1. Elegí una foto de tu dispositivo:</label>
+    <input type="file" id="memPhoto" accept="image/*" style="margin:6px 0 8px;" onchange="previewMemoryFile(event)">
+    <img id="memPreviewImg" class="preview-thumb" alt="Vista previa">
+    <label style="font-size:0.85rem; font-weight:700;">2. Escribí una frase del momento:</label>
+    <input type="text" id="memCaption" placeholder="Escribí una frase..." style="margin:6px 0 12px;">
+    <button id="uploadMemBtn" class="btn btn-green" style="width:100%; font-size:1rem;" onclick="addMemory()">⬆️ Subir imagen a la página</button>
+  </div>
+</div>
+
+<script>
+  const ADMIN_CODE = "topveranos";
+  const STORAGE_KEY = "martys_bucket_list_v10";
+
+  const EMPTY_DATA = {
+    userName: "",
+    activities: [],
+    calendarEvents: [],
+    memories: []
+  };
+
+  let db = loadData();
+  let isAdmin = false;
+  let selectionMode = false;
+  let selectedIds = new Set();
+  let currentCalDate = new Date(2026, 10, 1);
+  let selectedDayIso = null;
+  let readyPhotoDataUrl = "";
+  let activeInfoActivityId = null;
+  let pendingJoinActivityId = null;
+
+  function loadData() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && Array.isArray(saved.activities)) {
+        return {
+          userName: saved.userName || "",
+          activities: saved.activities,
+          calendarEvents: Array.isArray(saved.calendarEvents) ? saved.calendarEvents : [],
+          memories: Array.isArray(saved.memories) ? saved.memories : []
+        };
+      }
+    } catch (e) {}
+    return structuredClone(EMPTY_DATA);
+  }
+
+  function saveData() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+      return true;
+    } catch (e) {
+      alert("Se llenó la memoria del navegador. Probá subir fotos más livianas.");
+      return false;
+    }
+  }
+
+  /* MODALES */
+  function openModal(id) {
+    document.getElementById(id).classList.add("open");
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove("open");
+  }
+
+  /* NOMBRE INICIAL */
+  function openNameModal() {
+    document.getElementById("nameInput").value = db.userName || "";
+    openModal("nameModal");
+    setTimeout(() => document.getElementById("nameInput").focus(), 50);
+  }
+
+  function saveUserName() {
+    const val = document.getElementById("nameInput").value.trim();
+    if (!val) {
+      alert("Por favor escribí tu nombre.");
+      return;
+    }
+    db.userName = val;
+    saveData();
+    updateUserLabel();
+    renderAll();
+    closeModal("nameModal");
+
+    if (pendingJoinActivityId) {
+      const targetId = pendingJoinActivityId;
+      pendingJoinActivityId = null;
+      joinActivityById(targetId);
+    }
+  }
+
+  function updateUserLabel() {
+    const lbl = document.getElementById("currentUserLabel");
+    lbl.textContent = db.userName ? `Soy ${db.userName}` : "Hola! Poné tu nombre";
+  }
+
+  /* ADMIN */
+  function openAdminModal() {
+    if (isAdmin) {
+      document.getElementById("adminPanel").classList.toggle("open");
+      return;
+    }
+    document.getElementById("adminPassInput").value = "";
+    openModal("adminPassModal");
+    setTimeout(() => document.getElementById("adminPassInput").focus(), 50);
+  }
+
+  function verifyAdminPass() {
+    const pass = document.getElementById("adminPassInput").value;
+    if (pass === ADMIN_CODE) {
+      isAdmin = true;
+      closeModal("adminPassModal");
+      document.getElementById("adminBtn").classList.add("active");
+      document.getElementById("adminBtn").textContent = "🔓 Admin";
+      document.getElementById("adminPanel").classList.add("open");
+      populateAdminActivitySelects();
+      renderAll();
+    } else {
+      alert("Contraseña incorrecta.");
+    }
+  }
+
+  function logoutAdmin() {
+    isAdmin = false;
+    document.getElementById("adminBtn").classList.remove("active");
+    document.getElementById("adminBtn").textContent = "🔒 Admin";
+    document.getElementById("adminPanel").classList.remove("open");
+    renderAll();
+  }
+
+  function populateAdminActivitySelects() {
+    const opts = db.activities.length
+      ? db.activities.map(a => `<option value="${a.id}">${escapeHtml(formatActivityTitle(a))}</option>`).join("")
+      : `<option value="">Sin actividades aún</option>`;
+    document.getElementById("admLinkActivity").innerHTML = opts;
+    document.getElementById("admManageActivity").innerHTML = opts;
+    syncManageActivityFields();
+  }
+
+  function syncManageActivityFields() {
+    const id = document.getElementById("admManageActivity").value;
+    const act = db.activities.find(a => a.id === id);
+    if (!act) {
+      document.getElementById("admManualCount").value = "";
+      document.getElementById("admEditNoSignup").checked = false;
+      return;
+    }
+    document.getElementById("admManualCount").value = getGoingCount(act);
+    document.getElementById("admEditNoSignup").checked = Boolean(act.noSignup);
+  }
+
+  function adminCreateActivity() {
+    const name = document.getElementById("admActName").value.trim();
+    const info = document.getElementById("admActInfo").value.trim() || "Actividad de verano.";
+    const noSignup = document.getElementById("admActNoSignup").checked;
+    if (!name) return;
+
+    db.activities.push({
+      id: "act-" + Date.now(),
+      name,
+      info,
+      done: false,
+      version: 1,
+      participants: [],
+      noSignup,
+      manualCount: 0
+    });
+    document.getElementById("admActName").value = "";
+    document.getElementById("admActInfo").value = "";
+    document.getElementById("admActNoSignup").checked = false;
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+
+  function addSpecialPreset(label) {
+    db.activities.push({
+      id: "act-" + Date.now() + "-" + Math.random().toString(36).slice(2, 5),
+      name: label,
+      info: `Reto especial de verano: ${label}.`,
+      done: false,
+      version: 1,
+      participants: [],
+      noSignup: true,
+      manualCount: 0
+    });
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+
+  function adminSaveActivitySettings() {
+    const id = document.getElementById("admManageActivity").value;
+    const act = db.activities.find(a => a.id === id);
+    if (!act) return;
+    const countVal = Math.max(0, Number(document.getElementById("admManualCount").value || 0));
+    act.noSignup = document.getElementById("admEditNoSignup").checked;
+    act.manualCount = countVal;
+    saveData();
+    renderAll();
+  }
+
+  function adminScheduleActivity() {
+    const activityId = document.getElementById("admLinkActivity").value;
+    const date = document.getElementById("admLinkDate").value;
+    if (!activityId || !date) return;
+    db.calendarEvents.push({
+      id: "ev-" + Date.now(),
+      date,
+      activityId
+    });
+    saveData();
+    renderCalendar();
+    alert("Actividad agendada en el calendario.");
+  }
+
+  /* RELOJ VERANO RESTANTE (28 NOV - 28 FEB) */
+  function tickClock() {
+    const now = new Date();
+    const summerStart = new Date(2026, 10, 28, 0, 0, 0);
+    const summerEnd = new Date(2027, 1, 28, 23, 59, 59);
+
+    let target = summerEnd;
+    let sub = "Temporada de verano (28 Nov – 28 Feb)";
+    if (now < summerStart) {
+      target = summerStart;
+      sub = "Falta para el inicio del verano (28 Nov)";
+    }
+
+    const diff = Math.max(0, target - now);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff / 3600000) % 24);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("cDays").textContent = String(d).padStart(2, "0");
+    document.getElementById("cHours").textContent = String(h).padStart(2, "0");
+    document.getElementById("cMins").textContent = String(m).padStart(2, "0");
+    document.getElementById("cSecs").textContent = String(s).padStart(2, "0");
+    document.getElementById("clockSubText").textContent = sub;
+  }
+  setInterval(tickClock, 1000);
+  tickClock();
+
+  /* ACTIVIDADES, CONTADOR DE CUÁNTOS VAN Y MODO SIN ANOTARSE */
+  function formatActivityTitle(act) {
+    return act.version > 1 ? `${act.name} ${act.version}.0` : act.name;
+  }
+
+  function getGoingCount(act) {
+    const base = Array.isArray(act.participants) ? act.participants.length : 0;
+    const extra = Number(act.manualCount || 0);
+    return Math.max(base, extra);
+  }
+
+  function formatActivityStatus(act) {
+    const count = getGoingCount(act);
+    const countLabel = `(${count} ${count === 1 ? "vamos" : "vamos"})`;
+    if (act.noSignup) {
+      return `Sin anotarse • ${countLabel}`;
+    }
+    if (act.participants && act.participants.length) {
+      return `${act.participants.join(", ")} • ${countLabel}`;
+    }
+    return `nadie anotado aún • ${countLabel}`;
+  }
+
+  function canUserPickActivity(act) {
+    return selectionMode && !act.done && !act.noSignup;
+  }
+
+  function toggleSelectionMode() {
+    if (!db.userName) {
+      openNameModal();
+      return;
+    }
+    selectionMode = !selectionMode;
+    selectedIds.clear();
+    if (selectionMode) {
+      db.activities.forEach(a => {
+        if (!a.done && !a.noSignup && a.participants.includes(db.userName)) {
+          selectedIds.add(a.id);
+        }
+      });
+    }
+    updateSelectionUI();
+    renderActivities();
+  }
+
+  function cancelSelectionMode() {
+    selectionMode = false;
+    selectedIds.clear();
+    updateSelectionUI();
+    renderActivities();
+  }
+
+  function updateSelectionUI() {
+    const btn = document.getElementById("toggleSelectBtn");
+    const hint = document.getElementById("selectionHint");
+    const bar = document.getElementById("confirmSelectionBar");
+    btn.classList.toggle("active", selectionMode);
+    btn.textContent = selectionMode ? "SELECCIONANDO ACTIVIDADES..." : "SELECCIONA ACTIVIDADES PARA ANOTARTE";
+    hint.style.display = selectionMode ? "block" : "none";
+    bar.style.display = selectionMode ? "flex" : "none";
+  }
+
+  function toggleItemSelection(id) {
+    if (!selectionMode) return;
+    const act = db.activities.find(a => a.id === id);
+    if (!act || act.done || act.noSignup) return;
+    if (selectedIds.has(id)) selectedIds.delete(id);
+    else selectedIds.add(id);
+    renderActivities();
+  }
+
+  function confirmSelectedActivities() {
+    if (!db.userName) {
+      openNameModal();
+      return;
+    }
+    db.activities.forEach(act => {
+      if (act.done || act.noSignup) return;
+      const hasUser = act.participants.includes(db.userName);
+      if (selectedIds.has(act.id) && !hasUser) {
+        act.participants.push(db.userName);
+      } else if (!selectedIds.has(act.id) && hasUser) {
+        act.participants = act.participants.filter(p => p !== db.userName);
+      }
+      if (Number(act.manualCount || 0) < act.participants.length) {
+        act.manualCount = act.participants.length;
+      }
+    });
+    selectionMode = false;
+    selectedIds.clear();
+    saveData();
+    updateSelectionUI();
+    renderAll();
+  }
+
+  function proposeActivity() {
+    const input = document.getElementById("proposeInput");
+    const name = input.value.trim();
+    if (!name) return;
+    const participants = db.userName ? [db.userName] : [];
+    db.activities.push({
+      id: "act-" + Date.now(),
+      name,
+      info: "Propuesta de actividad para el verano.",
+      done: false,
+      version: 1,
+      participants,
+      noSignup: false,
+      manualCount: participants.length
+    });
+    input.value = "";
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+
+  function toggleDoneActivity(id) {
+    const act = db.activities.find(a => a.id === id);
+    if (!act) return;
+    act.done = !act.done;
+    saveData();
+    renderAll();
+  }
+
+  function repeatActivityAtEnd(id) {
+    const original = db.activities.find(a => a.id === id);
+    if (!original) return;
+    const nextVersion = (original.version || 1) + 1;
+    db.activities.push({
+      id: "act-" + Date.now(),
+      name: original.name,
+      info: original.info || "Actividad de verano.",
+      done: false,
+      version: nextVersion,
+      participants: [],
+      noSignup: Boolean(original.noSignup),
+      manualCount: 0
+    });
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+
+  function openActivityInfo(id) {
+    const act = db.activities.find(a => a.id === id);
+    if (!act) return;
+    activeInfoActivityId = id;
+
+    const linkedDates = db.calendarEvents
+      .filter(ev => ev.activityId === act.id)
+      .map(ev => ev.date);
+
+    const titleText = formatActivityTitle(act);
+    document.getElementById("infoTitle").textContent = titleText;
+    document.getElementById("infoDesc").textContent = act.info || "Actividad de verano.";
+    const count = getGoingCount(act);
+    document.getElementById("infoPeople").textContent = act.noSignup
+      ? `Modo sin anotarse • Contador: ${count} ${count === 1 ? "va" : "van"}`
+      : (act.participants.length
+          ? `Anotados (${count}): ${act.participants.join(", ")}`
+          : `Contador: ${count} van • Todavía no hay nadie anotado`);
+    document.getElementById("infoCalDates").textContent = linkedDates.length
+      ? `📅 Agendada en calendario: ${linkedDates.join(", ")}`
+      : "";
+
+    /* Embed de actividad estilo Spotify: solo web + nombre de actividad + botón Unirte */
+    document.getElementById("embedActTitle").textContent = titleText;
+    const joinBtn = document.getElementById("embedJoinBtn");
+    if (act.noSignup || act.done) {
+      joinBtn.disabled = true;
+      joinBtn.textContent = act.done ? "Listo" : "Sin anotarse";
+    } else if (db.userName && act.participants.includes(db.userName)) {
+      joinBtn.disabled = false;
+      joinBtn.textContent = "Anotado ✓";
+    } else {
+      joinBtn.disabled = false;
+      joinBtn.textContent = "Unirte";
+    }
+
+    openModal("infoModal");
+  }
+
+  function joinActivityById(id) {
+    const act = db.activities.find(a => a.id === id);
+    if (!act || act.noSignup || act.done) return;
+    if (!db.userName) {
+      pendingJoinActivityId = id;
+      openNameModal();
+      return;
+    }
+    if (!act.participants.includes(db.userName)) {
+      act.participants.push(db.userName);
+    }
+    if (Number(act.manualCount || 0) < act.participants.length) {
+      act.manualCount = act.participants.length;
+    }
+    saveData();
+    renderAll();
+    if (activeInfoActivityId === id) {
+      openActivityInfo(id);
+    }
+  }
+
+  function joinFromActivityEmbed() {
+    if (!activeInfoActivityId) return;
+    joinActivityById(activeInfoActivityId);
+  }
+
+  function getActivityShareUrl(id) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("act", id);
+    return url.toString();
+  }
+
+  function copyTextToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    }
+  }
+
+  function copyCurrentActivityLink() {
+    if (!activeInfoActivityId) return;
+    const link = getActivityShareUrl(activeInfoActivityId);
+    copyTextToClipboard(link);
+    alert("Link de la actividad copiado:\n" + link);
+  }
+
+  function shareSiteEmbed() {
+    const cleanUrl = window.location.origin + window.location.pathname;
+    copyTextToClipboard(cleanUrl);
+    const lbl = document.getElementById("siteEmbedLabel");
+    const prev = lbl.textContent;
+    lbl.textContent = "Link copiado ✓";
+    setTimeout(() => { lbl.textContent = prev; }, 1600);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderActivities() {
+    const grid = document.getElementById("activitiesGrid");
+    if (!db.activities.length) {
+      grid.innerHTML = `<div class="empty-list-note">Todavía no hay actividades cargadas. Agregá la primera arriba o en Admin.</div>`;
+      renderMyJoinedActivities();
+      return;
+    }
+
+    grid.innerHTML = db.activities.map(act => {
+      const isSelected = selectedIds.has(act.id);
+      const pickable = canUserPickActivity(act);
+      const statusText = formatActivityStatus(act);
+
+      const reloadBtn = act.done
+        ? `<button class="mini-icon-btn reload-v2-btn" title="Hacer de vuelta ${(act.version || 1) + 1}.0" onclick="event.stopPropagation(); repeatActivityAtEnd('${act.id}')">↻ ${(act.version || 1) + 1}.0</button>`
+        : "";
+
+      const adminTacharBtn = isAdmin
+        ? `<button class="mini-icon-btn" onclick="event.stopPropagation(); toggleDoneActivity('${act.id}')">${act.done ? "Desmarcar" : "Tachar"}</button>`
+        : "";
+
+      const noSignupBadge = act.noSignup
+        ? `<span class="badge-nosignup">sin anotarse</span>`
+        : "";
+
+      return `
+        <div class="check-item ${act.done ? "done" : ""} ${act.noSignup ? "no-signup-item" : ""} ${pickable ? "selectable" : ""} ${isSelected ? "highlighted" : ""}" onclick="toggleItemSelection('${act.id}')">
+          <div class="pink-box">
+            ${act.done ? `<span class="check-mark">✓</span>` : (isSelected ? `<span class="check-mark">✓</span>` : "")}
+          </div>
+          <div class="check-content">
+            <div class="check-title-row">
+              <span class="check-name">${escapeHtml(formatActivityTitle(act))}</span>
+              ${noSignupBadge}
+              ${reloadBtn}
+              <button class="mini-icon-btn" title="Ver info" onclick="event.stopPropagation(); openActivityInfo('${act.id}')">ℹ️</button>
+              ${adminTacharBtn}
+            </div>
+            <div class="check-people">${escapeHtml(statusText)}</div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    renderMyJoinedActivities();
+  }
+
+  function renderMyJoinedActivities() {
+    const box = document.getElementById("myJoinedList");
+    if (!db.userName) {
+      box.innerHTML = `<span>Poné tu nombre arriba para ver a qué actividades estás anotado.</span>`;
+      return;
+    }
+    const mine = db.activities.filter(a => !a.noSignup && a.participants.includes(db.userName));
+    if (!mine.length) {
+      box.innerHTML = `<span>Todavía no te anotaste a ninguna actividad, <strong>${escapeHtml(db.userName)}</strong>.</span>`;
+      return;
+    }
+    box.innerHTML = mine.map(a => `
+      <span class="joined-pill">✓ ${escapeHtml(formatActivityTitle(a))}</span>
+    `).join("");
+  }
+
+  /* MEMORIES CON HUECOS LISTOS, SUBIDA Y COMPRESIÓN */
+  function openMemoryModal() {
+    readyPhotoDataUrl = "";
+    document.getElementById("memCaption").value = "";
+    document.getElementById("memPhoto").value = "";
+    const prev = document.getElementById("memPreviewImg");
+    prev.style.display = "none";
+    prev.src = "";
+    openModal("memoryModal");
+  }
+
+  function previewMemoryFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const maxW = 900;
+        const scale = Math.min(1, maxW / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+        readyPhotoDataUrl = canvas.toDataURL("image/jpeg", 0.8);
+        const prev = document.getElementById("memPreviewImg");
+        prev.src = readyPhotoDataUrl;
+        prev.style.display = "block";
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function addMemory() {
+    if (!readyPhotoDataUrl) {
+      alert("Primero elegí una imagen para subir.");
+      return;
+    }
+    const caption = document.getElementById("memCaption").value.trim();
+    db.memories.unshift({
+      id: "mem-" + Date.now(),
+      caption,
+      author: db.userName || "",
+      date: new Date().toLocaleDateString("es-UY"),
+      photo: readyPhotoDataUrl
+    });
+    if (saveData()) {
+      renderMemories();
+      closeModal("memoryModal");
+    }
+  }
+
+  function renderMemories() {
+    const grid = document.getElementById("memoriesGrid");
+    const slotsToShow = Math.max(4, db.memories.length);
+    let html = "";
+
+    for (let i = 0; i < slotsToShow; i++) {
+      const m = db.memories[i];
+      if (m) {
+        const metaParts = [m.author, m.date].filter(Boolean).join(" • ");
+        html += `
+          <article class="mem-tile">
+            <img src="${m.photo}" alt="${escapeHtml(m.caption || "Recuerdo")}">
+            <div class="mem-overlay">
+              ${m.caption ? `<p class="mem-caption">${escapeHtml(m.caption)}</p>` : ""}
+              ${metaParts ? `<div class="mem-meta">📸 ${escapeHtml(metaParts)}</div>` : ""}
+            </div>
+          </article>
+        `;
+      } else {
+        html += `
+          <div class="mem-slot-empty" onclick="openMemoryModal()">
+            <div>+ Espacio para foto</div>
+          </div>
+        `;
+      }
+    }
+    grid.innerHTML = html;
+  }
+
+  /* CALENDARIO COMPLETO DE 12 MESES */
+  const MONTH_NAMES = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+
+  function initMonthPicker() {
+    const picker = document.getElementById("monthPicker");
+    picker.innerHTML = MONTH_NAMES.map((name, idx) => `<option value="${idx}">${name}</option>`).join("");
+  }
+
+  function pickMonth(monthIdx) {
+    currentCalDate = new Date(currentCalDate.getFullYear(), Number(monthIdx), 1);
+    renderCalendar();
+  }
+
+  function moveMonth(delta) {
+    currentCalDate = new Date(currentCalDate.getFullYear(), currentCalDate.getMonth() + delta, 1);
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    const y = currentCalDate.getFullYear();
+    const m = currentCalDate.getMonth();
+    document.getElementById("monthPicker").value = String(m);
+    document.getElementById("calYearLabel").textContent = y;
+
+    const firstDow = new Date(y, m, 1).getDay();
+    const totalDays = new Date(y, m + 1, 0).getDate();
+    const dows = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+    let html = dows.map(d => `<div class="cal-dow">${d}</div>`).join("");
+    for (let i = 0; i < firstDow; i++) {
+      html += `<div class="cal-day empty"></div>`;
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+      const iso = `${y}-${String(m + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      const dayEvents = db.calendarEvents.filter(ev => ev.date === iso);
+      const tagsHtml = dayEvents.map(ev => {
+        const act = db.activities.find(a => a.id === ev.activityId);
+        return act ? `<span class="cal-tag">${escapeHtml(formatActivityTitle(act))}</span>` : "";
+      }).join("");
+
+      html += `
+        <div class="cal-day ${dayEvents.length ? "has-plan" : ""}" onclick="selectCalendarDay('${iso}')">
+          <span>${day}</span>
+          ${tagsHtml}
+        </div>
+      `;
+    }
+    document.getElementById("calGrid").innerHTML = html;
+  }
+
+  function selectCalendarDay(iso) {
+    selectedDayIso = iso;
+    const dayEvents = db.calendarEvents.filter(ev => ev.date === iso);
+    const box = document.getElementById("calDetail");
+
+    const listHtml = dayEvents.length
+      ? dayEvents.map(ev => {
+          const act = db.activities.find(a => a.id === ev.activityId);
+          if (!act) return "";
+          const count = getGoingCount(act);
+          const who = act.noSignup
+            ? `sin anotarse • ${count} vamos`
+            : (act.participants.length ? `${act.participants.join(", ")} • ${count} vamos` : `${count} vamos`);
+          const delBtn = isAdmin ? `<button class="mini-icon-btn" onclick="removeCalendarEvent('${ev.id}')">✕</button>` : "";
+          return `<div style="margin-top:4px;">• <strong>${escapeHtml(formatActivityTitle(act))}</strong> (${escapeHtml(who)}) ${delBtn}</div>`;
+        }).join("")
+      : `<div>No hay actividades agendadas para este día.</div>`;
+
+    const linkControls = (isAdmin && db.activities.length) ? `
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <select id="dayActSelect" style="width:auto; flex:1; min-width:180px;">
+          ${db.activities.map(a => `<option value="${a.id}">${escapeHtml(formatActivityTitle(a))}</option>`).join("")}
+        </select>
+        <button class="btn btn-green btn-sm" onclick="assignActivityToSelectedDay()">Agendar aquí</button>
+      </div>
+    ` : "";
+
+    box.innerHTML = `<strong>📅 ${iso}</strong>${listHtml}${linkControls}`;
+  }
+
+  function assignActivityToSelectedDay() {
+    if (!selectedDayIso) return;
+    const activityId = document.getElementById("dayActSelect").value;
+    if (!activityId) return;
+    db.calendarEvents.push({
+      id: "ev-" + Date.now(),
+      date: selectedDayIso,
+      activityId
+    });
+    saveData();
+    renderCalendar();
+    selectCalendarDay(selectedDayIso);
+  }
+
+  function removeCalendarEvent(evId) {
+    db.calendarEvents = db.calendarEvents.filter(ev => ev.id !== evId);
+    saveData();
+    renderCalendar();
+    if (selectedDayIso) selectCalendarDay(selectedDayIso);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, s => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[s]));
+  }
+
+  function renderAll() {
+    updateUserLabel();
+    renderActivities();
+    renderMemories();
+    renderCalendar();
+  }
+
+  initMonthPicker();
+  renderAll();
+
+  const urlActParam = new URLSearchParams(window.location.search).get("act");
+  if (urlActParam && db.activities.some(a => a.id === urlActParam)) {
+    openActivityInfo(urlActParam);
+  } else if (!db.userName) {
+    openNameModal();
+  }
+</script>
+</body>
+</html>
