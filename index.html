@@ -1622,6 +1622,14 @@ function deleteActivity(id) {
               ${reloadBtn}
               <button class="mini-icon-btn" title="Ver info" onclick="event.stopPropagation(); openActivityInfo('${act.id}')">ℹ️</button>
               ${adminTacharBtn}
+              <div class="check-title-row">
+              <span class="check-name">${escapeHtml(formatActivityTitle(act))}</span>
+              ${noSignupBadge}
+              ${reloadBtn}
+              <button class="mini-icon-btn" title="Ver info" onclick="event.stopPropagation(); openActivityInfo('${act.id}')">ℹ️</button>
+              ${adminTacharBtn}
+              <button class="mini-icon-btn" title="Eliminar actividad" onclick="event.stopPropagation(); deleteActivity('${act.id}')">🗑️</button>
+            </div>
             </div>
             <div class="check-people">${escapeHtml(statusText)}</div>
           </div>
