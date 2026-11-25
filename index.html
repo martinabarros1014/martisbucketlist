@@ -1287,6 +1287,28 @@
     renderAll();
   }
 
+  function deleteSelectedAdminActivity() {
+    if (!isAdmin) return;
+    const id = document.getElementById("admManageActivity").value;
+    if (!id) return;
+    const act = db.activities.find(a => a.id === id);
+    if (!act) return;
+    if (!confirm(`¿Seguro que querés eliminar "${formatActivityTitle(act)}"?`)) return;
+
+    db.activities = db.activities.filter(a => a.id !== id);
+    db.calendarEvents = db.calendarEvents.filter(ev => ev.activityId !== id);
+    selectedIds.delete(id);
+
+    if (activeInfoActivityId === id) {
+      activeInfoActivityId = null;
+      closeModal("infoModal");
+    }
+
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+
   function adminScheduleActivity() {
     const activityId = document.getElementById("admLinkActivity").value;
     const date = document.getElementById("admLinkDate").value;
@@ -1470,9 +1492,9 @@
     saveData();
     populateAdminActivitySelects();
     renderAll();
-    
   }
-function deleteActivity(id) {
+
+  function deleteActivity(id) {
     const act = db.activities.find(a => a.id === id);
     if (!act) return;
     if (!confirm(`¿Seguro que querés eliminar "${formatActivityTitle(act)}"?`)) return;
@@ -1490,7 +1512,7 @@ function deleteActivity(id) {
     populateAdminActivitySelects();
     renderAll();
   }
-  
+
   function openActivityInfo(id) {
     const act = db.activities.find(a => a.id === id);
     if (!act) return;
@@ -1622,14 +1644,6 @@ function deleteActivity(id) {
               ${reloadBtn}
               <button class="mini-icon-btn" title="Ver info" onclick="event.stopPropagation(); openActivityInfo('${act.id}')">ℹ️</button>
               ${adminTacharBtn}
-              <div class="check-title-row">
-              <span class="check-name">${escapeHtml(formatActivityTitle(act))}</span>
-              ${noSignupBadge}
-              ${reloadBtn}
-              <button class="mini-icon-btn" title="Ver info" onclick="event.stopPropagation(); openActivityInfo('${act.id}')">ℹ️</button>
-              ${adminTacharBtn}
-              <button class="mini-icon-btn" title="Eliminar actividad" onclick="event.stopPropagation(); deleteActivity('${act.id}')">🗑️</button>
-            </div>
             </div>
             <div class="check-people">${escapeHtml(statusText)}</div>
           </div>
