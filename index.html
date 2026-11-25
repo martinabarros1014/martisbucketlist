@@ -1470,8 +1470,27 @@
     saveData();
     populateAdminActivitySelects();
     renderAll();
+    
   }
+function deleteActivity(id) {
+    const act = db.activities.find(a => a.id === id);
+    if (!act) return;
+    if (!confirm(`¿Seguro que querés eliminar "${formatActivityTitle(act)}"?`)) return;
 
+    db.activities = db.activities.filter(a => a.id !== id);
+    db.calendarEvents = db.calendarEvents.filter(ev => ev.activityId !== id);
+    selectedIds.delete(id);
+
+    if (activeInfoActivityId === id) {
+      activeInfoActivityId = null;
+      closeModal("infoModal");
+    }
+
+    saveData();
+    populateAdminActivitySelects();
+    renderAll();
+  }
+  
   function openActivityInfo(id) {
     const act = db.activities.find(a => a.id === id);
     if (!act) return;
